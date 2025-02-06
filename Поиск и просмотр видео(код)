@@ -1,0 +1,19 @@
+import unittest
+
+# Пример функции поиска видео
+def search_videos(query):
+    if query == "example video":
+        return ["video1", "video2"]
+    return []
+
+class TestVideoSearchCode(unittest.TestCase):
+    def test_search_with_results(self):
+        result = search_videos("example video")
+        self.assertEqual(len(result), 2)
+    
+    def test_search_no_results(self):
+        result = search_videos("nonexistent video")
+        self.assertEqual(len(result), 0)
+
+if __name__ == "__main__":
+    unittest.main()
