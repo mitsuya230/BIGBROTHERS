@@ -1,0 +1,24 @@
+import unittest
+
+# Пример функции загрузки видео
+def upload_video(file_path, title, description):
+    if not file_path.endswith(".mp4"):
+        raise ValueError("Only .mp4 files are allowed")
+    if len(title) == 0:
+        raise ValueError("Title is required")
+    return True
+
+class TestVideoUploadCode(unittest.TestCase):
+    def test_valid_upload(self):
+        self.assertTrue(upload_video("test_video.mp4", "Test Video", "Test Description"))
+
+    def test_invalid_file_type(self):
+        with self.assertRaises(ValueError):
+            upload_video("test_video.avi", "Test Video", "Test Description")
+
+    def test_empty_title(self):
+        with self.assertRaises(ValueError):
+            upload_video("test_video.mp4", "", "Test Description")
+
+if __name__ == "__main__":
+    unittest.main()
