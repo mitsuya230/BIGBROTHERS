@@ -1,0 +1,37 @@
+pip install selenium
+from selenium import webdriver
+import unittest
+
+class TestRegistration(unittest.TestCase):
+    def setUp(self):
+        # Указываем путь к драйверу Chrome
+        self.driver = webdriver.Chrome(executable_path="path_to_chromedriver")
+    
+    def test_registration(self):
+        driver = self.driver
+        driver.get("https://rutube.ru/")
+
+        # Нажимаем кнопку "Регистрация"
+        register_button = driver.find_element_by_xpath("//button[text()='Регистрация']")
+        register_button.click()
+
+        # Вводим данные для регистрации
+        email_input = driver.find_element_by_id("email")
+        email_input.send_keys("testuser@example.com")
+        
+        password_input = driver.find_element_by_id("password")
+        password_input.send_keys("password123")
+
+        # Нажимаем "Зарегистрироваться"
+        submit_button = driver.find_element_by_xpath("//button[text()='Зарегистрироваться']")
+        submit_button.click()
+
+        # Проверяем успешность регистрации
+        success_message = driver.find_element_by_xpath("//div[@class='success-message']")
+        self.assertTrue(success_message.is_displayed())
+
+    def tearDown(self):
+        self.driver.quit()
+
+if __name__ == "__main__":
+    unittest.main()
