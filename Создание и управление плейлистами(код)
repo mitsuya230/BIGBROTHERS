@@ -1,0 +1,18 @@
+import unittest
+
+# Пример функции для создания плейлиста
+def create_playlist(name):
+    if len(name) == 0:
+        raise ValueError("Playlist name is required")
+    return True
+
+class TestPlaylistCode(unittest.TestCase):
+    def test_valid_playlist(self):
+        self.assertTrue(create_playlist("My Playlist"))
+    
+    def test_empty_playlist_name(self):
+        with self.assertRaises(ValueError):
+            create_playlist("")
+
+if __name__ == "__main__":
+    unittest.main()
